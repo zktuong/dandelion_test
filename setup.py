@@ -22,8 +22,6 @@ setup(
     packages=find_packages(),
     setup_requires=["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.0"],
     install_requires=requirements,
-    package_data={'dandelion': ['bin/tigger-genotype.R']},
-    data_files=[('bin', ['bin/tigger-genotype.R'])],
     include_package_data=True,
     classifiers=[
         "Programming Language :: Python :: 3.7",
