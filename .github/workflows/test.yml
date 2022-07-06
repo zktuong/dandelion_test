@@ -25,7 +25,7 @@ jobs:
   tests:
     needs:
       - changes
-    if: needs.changes.outputs.changed_file }} == *.yml* || needs.changes.outputs.changed_file == *.py* needs.changes.outputs.changed_file }} == *test*
+    if: needs.changes.outputs.changed_file == *.yml* || needs.changes.outputs.changed_file == *.py* needs.changes.outputs.changed_file == *test*
     timeout-minutes: 720
     defaults:
       run:
