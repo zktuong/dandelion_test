@@ -17,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       changed_file: ${{ steps.files.outputs.added_modified }}
+      keepgoing: ${{ steps.checkfiles.outputs.keepgoing }}
     steps:
       - id: files
         uses: jitterbit/get-changed-files@b17fbb00bdc0c0f63fcf166580804b4d2cdc2a42
@@ -25,13 +26,14 @@ jobs:
       - id: checkfiles
         run: |
           if [[ ${{ steps.files.outputs.added_modified }} == *.yml* || ${{ steps.files.outputs.added_modified }} == *.py* || ${{ steps.files.outputs.added_modified }} == *test* ]]; then
-            echo "keepgoing=true" >> $GITHUB_ENV
+            echo "::set-output name=keepgoing::true"
+          else
+            echo "::set-output name=keepgoing::false"
           fi
-
   tests:
     needs:
       - changes
-    if: ${{ env.keepgoing == 'true' }}
+    if: needs.changes.outputs.keepgoing == 'true'
     timeout-minutes: 720
     defaults:
       run:
