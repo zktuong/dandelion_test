@@ -23,7 +23,8 @@ jobs:
         with:
           format: 'json'
   tests:
-    dependsOn: changes
+    needs:
+      - changes
     timeout-minutes: 720
     defaults:
       run:
