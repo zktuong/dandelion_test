@@ -29,6 +29,7 @@ jobs:
     defaults:
       run:
         shell: bash -l {0}
+    changed_file: ${{ fromJson(needs.changes.outputs.changed_file) }}
     strategy:
       max-parallel: 6
       matrix:
