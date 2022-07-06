@@ -26,7 +26,7 @@ jobs:
     needs:
       - changes
     timeout-minutes: 720
-    if: contains(${{ fromJson(needs.changes.outputs.changed_file) }}, ['dandelion/*', 'tests/*'])
+    if: contains(${{ fromJson(needs.changes.outputs.changed_file) }}, '*.py')
     defaults:
       run:
         shell: bash -l {0}
