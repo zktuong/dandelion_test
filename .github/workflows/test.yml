@@ -26,6 +26,7 @@ jobs:
         run: |
           if [[ ${{ steps.files.outputs.added_modified }} == *.yml* || ${{ steps.files.outputs.added_modified }} == *.py* || ${{ steps.files.outputs.added_modified }} == *test* ]]; then
             echo "keepgoing=true" >> $GITHUB_ENV
+          fi
 
   tests:
     needs:
