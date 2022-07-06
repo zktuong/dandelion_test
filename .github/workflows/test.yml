@@ -51,12 +51,15 @@ jobs:
         if [[ "${{ matrix.changed_file }}" = dandelion/* ]]; then
           echo "keepgoing=true" >> $GITHUB_ENV
         fi 
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2
+    - name: Setup checkout
+      if: ${{ env.keepgoing == 'true' }}
+      uses: actions/checkout@v2
+    - name: Setup node
+      if: ${{ env.keepgoing == 'true' }}
+      uses: actions/setup-node@v2
     
     - name: Install macOS system dependencies
-      if: ${{ env.keepgoing == 'true' }}
-      if: matrix.config.os == 'macos-latest'
+      if: ${{ env.keepgoing == 'true' }} & matrix.config.os == 'macos-latest'
       run: |
         brew install cairo pkg-config autoconf automake libtool
 
