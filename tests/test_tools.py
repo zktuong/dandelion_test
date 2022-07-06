@@ -7,8 +7,13 @@ import dandelion as ddl
 import scanpy as sc
 from pathlib import Path
 
-from fixtures import (airr_reannotated, dummy_adata, create_testfolder,
-                      json_10x_cr6, dummy_adata_cr6)
+from fixtures import (
+    airr_reannotated,
+    dummy_adata,
+    create_testfolder,
+    json_10x_cr6,
+    dummy_adata_cr6,
+)
 
 
 def test_setup(create_testfolder, airr_reannotated, dummy_adata):
@@ -22,6 +27,7 @@ def test_setup(create_testfolder, airr_reannotated, dummy_adata):
     assert len(list(create_testfolder.iterdir())) == 1
     vdj2 = ddl.read_h5(f)
     assert vdj2.metadata is not None
+    assert vdj.metadata is not None
 
 
 # def test_find_clones(create_testfolder):

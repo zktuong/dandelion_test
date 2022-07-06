@@ -2,7 +2,7 @@
 # @Author: Kelvin
 # @Date:   2020-05-18 00:15:00
 # @Last Modified by:   Kelvin
-# @Last Modified time: 2022-07-06 22:21:13
+# @Last Modified time: 2022-07-06 22:24:01
 
 import seaborn as sns
 import pandas as pd
@@ -18,7 +18,6 @@ import random
 from adjustText import adjust_text
 from plotnine import (
     ggplot,
-    test,
     theme_classic,
     aes,
     geom_line,
