@@ -40,14 +40,16 @@ jobs:
       outputs:
         changed_file: ${{ steps.files.outputs.added_modified }}
       steps:
+      - id: files
         uses: jitterbit/get-changed-files@b17fbb00bdc0c0f63fcf166580804b4d2cdc2a42
         with:
           format: 'json'
-        run: |
-          # Continue if we have a changed Singularity recipe
-          if [[ "${{ matrix.changed_file }}" = dandelion/* ]]; then
-            echo "keepgoing=true" >> $GITHUB_ENV
-          fi 
+    - name: "keep going"
+       run: |
+        # Continue if we have a changed Singularity recipe
+        if [[ "${{ matrix.changed_file }}" = dandelion/* ]]; then
+          echo "keepgoing=true" >> $GITHUB_ENV
+        fi 
     - name: Setup checkout
       if: ${{ env.keepgoing == 'true' }}
       uses: actions/checkout@v2
