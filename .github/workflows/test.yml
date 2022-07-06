@@ -59,11 +59,9 @@ jobs:
       uses: actions/setup-node@v2
     
     - name: Install macOS system dependencies
-      if: ${{ env.keepgoing == 'true' }} 
-      then:
-        if: matrix.config.os == 'macos-latest'
-        run: |
-          brew install cairo pkg-config autoconf automake libtool
+      if: ${{ env.keepgoing == 'true' }} and matrix.config.os == 'macos-latest'
+      run: |
+        brew install cairo pkg-config autoconf automake libtool
 
     - name: Cache conda
       if: ${{ env.keepgoing == 'true' }}
