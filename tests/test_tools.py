@@ -27,7 +27,6 @@ def test_setup(create_testfolder, airr_reannotated, dummy_adata):
     assert len(list(create_testfolder.iterdir())) == 1
     vdj2 = ddl.read_h5(f)
     assert vdj2.metadata is not None
-    assert vdj.metadata is not None
 
 
 # def test_find_clones(create_testfolder):
