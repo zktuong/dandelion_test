@@ -17,15 +17,24 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       changed_file: ${{ steps.files.outputs.added_modified }}
+      run_rest_jobs: ${{ steps.set_output.outputs.run_jobs }}
     steps:
       - id: files
         uses: jitterbit/get-changed-files@b17fbb00bdc0c0f63fcf166580804b4d2cdc2a42
         with:
           format: 'json'
+      - id: checkfiles
+        run: |
+          if [[ ${{ steps.files.outputs.added_modified }} == *.yml* || ${{ steps.files.outputs.added_modified }} == *.py* || ${{ steps.files.outputs.added_modified }} == *test* ]]; then
+            echo "::checkfiles name=run_jobs::true"
+          else
+            echo "::checkfiles name=run_jobs::false"
+          fi
+
   tests:
     needs:
       - changes
-    if: needs.changes.outputs.changed_file == '*.yml*' || needs.changes.outputs.changed_file == '*.py*' || needs.changes.outputs.changed_file == '*test*'
+    if: needs.changes.outouts.run_rest_jobs == 'true'
     timeout-minutes: 720
     defaults:
       run:
