@@ -47,7 +47,7 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-      - name: "Check if files changed"
+      - name: "Check if relevant files changed"
         run: |
           # Continue if we have a changed files in dandelion
           if [[ "${{ matrix.changed_file }}" = dandelion/* ]]; then
